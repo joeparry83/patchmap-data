@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-10",
+  "generated": "2026-10-04",
   "sources": {
     "england_listed_buildings": {
       "provider": "Historic England",
@@ -7,7 +7,7 @@
       "endpoint": "ArcGIS FeatureServer (National_Heritage_List_for_England_NHLE_v02_VIEW/0)",
       "licence": "Open Government Licence",
       "crs_source": "British National Grid (EPSG:27700), served reprojected to WGS84 (EPSG:4326)",
-      "entries": 379680
+      "entries": 379685
     },
     "england_conservation_areas": {
       "provider": "Historic England",
@@ -22,14 +22,14 @@
       "endpoint": "DataMapWales GeoServer WFS (inspire-wg:Cadw_ListedBuildings)",
       "licence": "Open Government Licence / no use restrictions",
       "crs_source": "served in WGS84 (EPSG:4326)",
-      "entries": 30117
+      "entries": 30110
     },
     "wales_conservation_areas": {
       "provider": "DataMapWales (aggregated from Local Planning Authorities)",
       "dataset": "Conservation Areas (Wales)",
       "endpoint": "DataMapWales GeoServer WFS (geonode:conservation_areas_wales)",
       "licence": "Open Government Licence",
-      "entries": 529,
+      "entries": 531,
       "note": "Welsh conservation areas ARE published centrally as a national boundary dataset (529 areas, aggregated from local authorities). Designation remains a local-authority function, so the set is indicative and may lag recent LA designations."
     }
   },
@@ -43,45 +43,44 @@
       "industrial": "EXCLUDED (mills, works, kilns, engine houses, warehouses…). Some mills are now flats, but as a class they are not dwellings. \"Mill House\"/\"Mill Cottage\"/\"Mill Farm\" are kept."
     },
     "kept_categories": "houses, cottages, terraces, farmhouses, halls, manors, villas, lodges, almshouses, numbered street addresses, pubs/inns/hotels, and non-domestic but habitable buildings (shops, schools, town halls, etc. — \"other_building\", chiefly from Welsh BroadClass). Entries matching no rule default to KEPT (\"unclassified\") rather than being dropped.",
-    "unclassified_note": "England leaves ~18% of entries \"unclassified\" (no keyword matched) and kept by default; these are overwhelmingly plainly-named buildings (\"Ivy Cottage\", \"15 High Street\", \"The Old Bakery\"). They are counted as buildings but flagged class:\"unclassified\" so the assumption is inspectable, not hidden.",
+    "unclassified_note": "England leaves ~20% of entries \"unclassified\" (no keyword matched) and kept by default; these are overwhelmingly plainly-named buildings (\"Ivy Cottage\", \"15 High Street\", \"The Old Bakery\"). They are counted as buildings but flagged class:\"unclassified\" so the assumption is inspectable, not hidden.",
     "caveat": "Free-text names are not a clean taxonomy, so the split is approximate. Three nested counts are published (listed ⊃ buildings ⊃ residential); the app should show \"listed\" as the honest total and use dwellingsEstimate (residential + unclassified) for the density comparison — an estimate, see residential_filter.",
     "totals_before_after": {
       "england": {
-        "entries": 379680,
-        "buildings": 278200,
-        "excluded": 101480,
+        "entries": 379685,
+        "buildings": 278206,
+        "excluded": 101479,
         "excluded_pct": 26.7
       },
       "wales": {
-        "entries": 30117,
-        "buildings": 18429,
-        "excluded": 11688,
-        "excluded_pct": 38.8
+        "entries": 30110,
+        "buildings": 21544,
+        "excluded": 8566,
+        "excluded_pct": 28.4
       }
     },
     "excluded_by_category": {
-      "agricultural": 25227,
-      "religious": 23776,
-      "monument_memorial": 12136,
-      "bridge": 8536,
+      "agricultural": 24482,
+      "religious": 23229,
+      "monument_memorial": 12098,
       "tomb_grave": 7861,
-      "gate_railings": 6944,
-      "industrial": 6821,
-      "wall": 5840,
+      "bridge": 7818,
+      "gate_railings": 6943,
+      "industrial": 6459,
       "milestone_waymarker": 5836,
-      "telephone_box": 2446,
+      "wall": 5470,
       "cross": 2258,
-      "street_furniture": 2091,
-      "well_pump_trough": 1525,
+      "telephone_box": 2201,
+      "street_furniture": 2090,
+      "well_pump_trough": 1429,
       "lamp": 713,
       "statue": 669,
       "water_transport_infra": 356,
       "post_box": 133
     },
     "kept_by_category": {
-      "dwelling": 227291,
-      "unclassified": 67310,
-      "other_building": 2028
+      "dwelling": 222684,
+      "unclassified": 77066
     },
     "sample_exclusions": [
       {
@@ -262,7 +261,7 @@
     "commercial_examples": "The George Inn; The Castle Public House; Lloyds Bank; former National Schools; Corn Exchange; Market Hall; Victoria Pier; nursing home; community centre.",
     "density_basis": "HEADLINE = dwellingsEstimate = residential + unclassified-use buildings, per 1,000 households. Described as an ESTIMATE because the unclassified bucket is mostly (not certainly) dwellings. Chosen over strict residential because strict residential under-counts rural areas materially while barely affecting urban ones, biasing the patch-to-patch comparison the density figure exists for; an even estimate is preferable to an uneven under-count, and the small leak tail in the unclassified bucket is the lesser error. mixed is NOT included. All three tiers (listed, buildings, residential) plus useMixed/useUnclassified are stored, and every entry carries a per-entry use flag, so any basis can be recomputed without re-running the pipeline.",
     "mixed_use": {
-      "count": 4183,
+      "count": 4212,
       "pct_of_buildings": 1.4,
       "note": "Small (~1.3% of buildings). Genuine dual-use (e.g. \"No 67 (Cluny Cottage) and Post Office\", \"School House and School Cottage\"). Excluded from residential by default; because the count is small, including them would barely move density. Flagged use:\"mixed\" so you can fold them in if you prefer.",
       "samples": [
@@ -317,9 +316,9 @@
       ]
     },
     "unknown_use": {
-      "count": 56445,
-      "pct_of_all_entries": 13.8,
-      "pct_of_buildings": 19,
+      "count": 65157,
+      "pct_of_all_entries": 15.9,
+      "pct_of_buildings": 21.7,
       "note": "Habitable buildings whose name carries no use signal. After hardening the structure filter (position-independent rules for barns, mills, monuments, memorials, churches, gates, tombs, etc.), this bucket is now PREDOMINANTLY genuine dwellings named without a type word — country/village houses such as \"Tedgewood\", \"The Hermitage\", \"Rocklands\", \"Whitfield\", \"Sunnyside\". A small tail of structure leaks remains. It is heavily skewed to rural areas where houses are named rather than numbered: in urban Monmouth/Chepstow it is a handful of entries, in the rural Ross-on-Wye hinterland it is larger.",
       "decision": "ADOPTED as the headline density basis: dwellingsEstimate = residential + unknown. The residual unknown bucket is mostly real dwellings named without a type word, so strict residential under-counts homes — materially in rural areas, barely in urban ones. That uneven bias is worse for patch-to-patch comparison than the small, even over-count from the unclassified leak tail. Strict residential remains stored as a conservative floor; habitable buildings and the honest listed total are stored too. For urban patches the estimate and strict residential barely differ; for rural ones the difference is material (e.g. HR9 Ross-on-Wye 25.0 estimate vs 19.9 strict per 1,000).",
       "samples": [
@@ -375,22 +374,22 @@
     },
     "use_split": {
       "england": {
-        "residential": 195267,
-        "commercial": 22992,
-        "mixed": 4000,
-        "unknown": 55941
+        "residential": 195265,
+        "commercial": 22990,
+        "mixed": 4001,
+        "unknown": 55950
       },
       "wales": {
-        "residential": 14702,
-        "commercial": 3040,
-        "mixed": 183,
-        "unknown": 504
+        "residential": 10183,
+        "commercial": 1943,
+        "mixed": 211,
+        "unknown": 9207
       }
     },
     "totals_after": {
-      "england_residential": 195267,
-      "wales_residential": 14702,
-      "combined_residential": 209969
+      "england_residential": 195265,
+      "wales_residential": 10183,
+      "combined_residential": 205448
     }
   },
   "method": "Listed buildings joined to v6 sector polygons by point-in-polygon (ray casting, 0.2° grid index); district derived from sector code. Conservation areas assigned by polygon centroid. Same PIP engine as the census-households pipeline.",
@@ -398,19 +397,19 @@
   "grading": "England and Wales share grades I, II*, II. Scotland uses A, B, C (not processed — known gap).",
   "not_processed": "Scheduled monuments and registered parks & gardens were NOT processed. They sit in the same NHLE/Cadw datasets and would be straightforward to add (additional FeatureServer layers 6 and 7 for England; separate Cadw layers for Wales).",
   "totals": {
-    "listed_entries_total": 409797,
-    "buildings_after_filter": 296629,
-    "listed_assigned": 406653,
-    "listed_outside_all_polygons": 3144,
-    "conservation_areas_total": 8750,
-    "conservation_assigned": 8694,
+    "listed_entries_total": 409795,
+    "buildings_after_filter": 299750,
+    "listed_assigned": 406650,
+    "listed_outside_all_polygons": 3145,
+    "conservation_areas_total": 8752,
+    "conservation_assigned": 8696,
     "conservation_outside_all_polygons": 56,
     "conservation_straddling_district_boundary": 1127,
     "sector_features": 9384
   },
   "conservation_geometry": {
     "simplification": "Douglas-Peucker, tolerance 0.00007° (~6m), coordinates rounded to 6dp",
-    "raw_MB": 144.39,
+    "raw_MB": 144.46,
     "simplified_MB": 10.88
   },
   "scotland_note": "Historic Environment Scotland publishes listed buildings and conservation areas as open data (spatialdata.gov.scot / HES ArcGIS). Obtainable in comparable form (points + polygons), but grades differ (A/B/C) and would need a separate download; not attempted here.",

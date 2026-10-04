@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-10",
+  "generated": "2026-10-04",
   "sources": {
     "england": {
       "provider": "Environment Agency",
@@ -26,7 +26,7 @@
     "zone2": "Flood Zone 2 — medium probability: between 0.1% (1 in 1000) and 1% (1 in 100) from rivers, or 0.1%–0.5% from the sea. Reported here EXCLUDING Zone 3 to avoid double counting.",
     "zone1": "Everywhere else (low probability, <0.1%). Not published as a polygon; reported as the \"none\" remainder."
   },
-  "zone_overlap": "Publisher difference: the EA (England) Zone 2 polygon is the outer 0.1% envelope and CONTAINS Zone 3; the NRW (Wales) Zone 2 polygon is sparse/partial and does NOT contain Zone 3. STATISTICS are unaffected — each point is classified Zone 3 first, else Zone 2, else none, so household counts are mutually exclusive (Zone 2 = medium-only band) and never double-count. OVERLAY — the Zone-2 layer is drawn as the full >=0.1% envelope = dissolve(Zone 2 UNION Zone 3), so it visually contains Zone 3 for both publishers. Nesting check on the pooled EA+NRW point set (points in Z3 but not in any Zone-2 polygon; high because NRW FZ2 does not nest): 13363.",
+  "zone_overlap": "Publisher difference: the EA (England) Zone 2 polygon is the outer 0.1% envelope and CONTAINS Zone 3; the NRW (Wales) Zone 2 polygon is sparse/partial and does NOT contain Zone 3. STATISTICS are unaffected — each point is classified Zone 3 first, else Zone 2, else none, so household counts are mutually exclusive (Zone 2 = medium-only band) and never double-count. OVERLAY — the Zone-2 layer is drawn as the full >=0.1% envelope = dissolve(Zone 2 UNION Zone 3), so it visually contains Zone 3 for both publishers. Nesting check on the pooled EA+NRW point set (points in Z3 but not in any Zone-2 polygon; high because NRW FZ2 does not nest): 13409.",
   "defences": "The EA and NRW Flood Map for Planning zones deliberately IGNORE flood defences — they show the natural floodplain as if no defences existed. So a property counted here as at-risk may in practice be protected by a defence. Areas benefiting from defences (EA \"Areas Benefiting from Defences\", NRW TAN15 Defended Zones) are published separately and are NOT applied here.",
   "method": {
     "households": "ONS Postcode Directory (May 2026) live postcodes in England & Wales. Each postcode centroid (WGS84) classified against the pooled EA+NRW flood polygons. Households apportioned to each postcode = its OA census-2021 household count (TS041) divided evenly among the OA's live postcodes, then summed to district/sector by the postcode string.",
@@ -36,18 +36,18 @@
   "caveats": {
     "postcode_centroid": "A postcode covers several addresses; its centroid may sit in a zone while some addresses do not, or vice versa. The household figure is therefore approximate, but measures housing stock at risk far better than land-area percentage.",
     "household_apportionment": "OA households are split evenly across the OA's postcodes (actual counts per postcode are not published), a further approximation.",
-    "straddle": "Households in postcodes whose zone membership changes within ~75 m of the centroid (a proxy for postcodes straddling a zone boundary): 2,577,463 households in 184,131 postcodes."
+    "straddle": "Households in postcodes whose zone membership changes within ~75 m of the centroid (a proxy for postcodes straddling a zone boundary): 2,577,456 households in 184,228 postcodes."
   },
   "coverage": "England and Wales. Scottish areas (AB,DD,DG,EH,FK,G,HS,IV,KA,KW,KY,ML,PA,PH,TD,ZE) written with empty codes and an explanatory note. Northern Ireland (BT) is absent from the boundary set, as in the other pipelines.",
   "scotland_note": "SEPA (Scottish Environment Protection Agency) publishes flood maps for Scotland (Flood Maps / Flood Risk Management) as open data via an ArcGIS/spatialdata portal. Obtainable in broadly comparable form (river/coastal flood extents), though zone definitions and banding differ; not attempted here.",
   "totals": {
-    "postcodes_assigned": 1585479,
+    "postcodes_assigned": 1586615,
     "postcodes_unassigned_no_coord": 0,
-    "england_households_zone3": 1322372,
-    "england_households_zone2": 606023,
-    "england_households_total": 23424648,
-    "wales_households_zone3": 154385,
-    "wales_households_zone2": 29724,
+    "england_households_zone3": 1322207,
+    "england_households_zone2": 606556,
+    "england_households_total": 23424726,
+    "wales_households_zone3": 154497,
+    "wales_households_zone2": 29699,
     "wales_households_total": 1347074
   },
   "geometry": {

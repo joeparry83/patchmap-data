@@ -1,0 +1,422 @@
+{
+  "generated": "2026-08-10",
+  "sources": {
+    "england_listed_buildings": {
+      "provider": "Historic England",
+      "dataset": "National Heritage List for England (NHLE) — Listed Building points",
+      "endpoint": "ArcGIS FeatureServer (National_Heritage_List_for_England_NHLE_v02_VIEW/0)",
+      "licence": "Open Government Licence",
+      "crs_source": "British National Grid (EPSG:27700), served reprojected to WGS84 (EPSG:4326)",
+      "entries": 379680
+    },
+    "england_conservation_areas": {
+      "provider": "Historic England",
+      "dataset": "Conservation Areas (indicative, compiled from Local Planning Authorities)",
+      "endpoint": "ArcGIS FeatureServer (Conservation_Areas/0)",
+      "licence": "Open Government Licence",
+      "entries": 8221
+    },
+    "wales_listed_buildings": {
+      "provider": "Cadw",
+      "dataset": "Listed Buildings (Cof Cymru)",
+      "endpoint": "DataMapWales GeoServer WFS (inspire-wg:Cadw_ListedBuildings)",
+      "licence": "Open Government Licence / no use restrictions",
+      "crs_source": "served in WGS84 (EPSG:4326)",
+      "entries": 30117
+    },
+    "wales_conservation_areas": {
+      "provider": "DataMapWales (aggregated from Local Planning Authorities)",
+      "dataset": "Conservation Areas (Wales)",
+      "endpoint": "DataMapWales GeoServer WFS (geonode:conservation_areas_wales)",
+      "licence": "Open Government Licence",
+      "entries": 529,
+      "note": "Welsh conservation areas ARE published centrally as a national boundary dataset (529 areas, aggregated from local authorities). Designation remains a local-authority function, so the set is indicative and may lag recent LA designations."
+    }
+  },
+  "building_filter": {
+    "purpose": "A listed ENTRY is not a household. The register includes churches, bridges, milestones, telephone boxes, walls, monuments, war memorials, barns and boundary structures, none of which are dwellings. Every entry is classified so density can be computed from plausibly-habitable buildings rather than the raw entry count.",
+    "method": "England classified from the listing Name (the NHLE point layer carries no separate description field); the name is read head-first, before locator prepositions (at/to/near/of/metres…), which reliably names the principal structure. Wales additionally uses Cadw's BroadClass functional category as a second signal, plus the same name rules. A definite-habitable name (inn, hotel, farmhouse, cottage, rectory, …) overrides a leading structure word, so \"Bridge Farmhouse\" and \"Cross Keys Inn\" are kept.",
+    "excluded_categories": "bridges/aqueducts, milestones & waymarkers, telephone & post boxes, walls, gates/railings/piers, monuments & war memorials, statues, crosses, tombs/headstones/graves, wells/pumps/troughs/fountains, lamp posts, boundary markers & street furniture, canal/harbour infrastructure — plus the three judgement calls below.",
+    "judgement_calls": {
+      "churches_and_chapels": "EXCLUDED. A place of worship is a building but never a dwelling, and counting parish churches is exactly what inflates historic-town figures. Chapels converted to homes exist but are a small minority and are usually re-named as dwellings when relisted.",
+      "barns_and_agriculture": "EXCLUDED as-listed (barn, stable, byre, granary, dovecote, cartshed…), but FARMHOUSES are KEPT as dwellings. Barn conversions are common, but the listing describes the historic agricultural use and converted/unconverted cannot be told apart reliably; excluding is the honest default. Each is flagged class:\"agricultural\" so a future overlay can re-include.",
+      "industrial": "EXCLUDED (mills, works, kilns, engine houses, warehouses…). Some mills are now flats, but as a class they are not dwellings. \"Mill House\"/\"Mill Cottage\"/\"Mill Farm\" are kept."
+    },
+    "kept_categories": "houses, cottages, terraces, farmhouses, halls, manors, villas, lodges, almshouses, numbered street addresses, pubs/inns/hotels, and non-domestic but habitable buildings (shops, schools, town halls, etc. — \"other_building\", chiefly from Welsh BroadClass). Entries matching no rule default to KEPT (\"unclassified\") rather than being dropped.",
+    "unclassified_note": "England leaves ~18% of entries \"unclassified\" (no keyword matched) and kept by default; these are overwhelmingly plainly-named buildings (\"Ivy Cottage\", \"15 High Street\", \"The Old Bakery\"). They are counted as buildings but flagged class:\"unclassified\" so the assumption is inspectable, not hidden.",
+    "caveat": "Free-text names are not a clean taxonomy, so the split is approximate. Three nested counts are published (listed ⊃ buildings ⊃ residential); the app should show \"listed\" as the honest total and use dwellingsEstimate (residential + unclassified) for the density comparison — an estimate, see residential_filter.",
+    "totals_before_after": {
+      "england": {
+        "entries": 379680,
+        "buildings": 278200,
+        "excluded": 101480,
+        "excluded_pct": 26.7
+      },
+      "wales": {
+        "entries": 30117,
+        "buildings": 18429,
+        "excluded": 11688,
+        "excluded_pct": 38.8
+      }
+    },
+    "excluded_by_category": {
+      "agricultural": 25227,
+      "religious": 23776,
+      "monument_memorial": 12136,
+      "bridge": 8536,
+      "tomb_grave": 7861,
+      "gate_railings": 6944,
+      "industrial": 6821,
+      "wall": 5840,
+      "milestone_waymarker": 5836,
+      "telephone_box": 2446,
+      "cross": 2258,
+      "street_furniture": 2091,
+      "well_pump_trough": 1525,
+      "lamp": 713,
+      "statue": 669,
+      "water_transport_infra": 356,
+      "post_box": 133
+    },
+    "kept_by_category": {
+      "dwelling": 227291,
+      "unclassified": 67310,
+      "other_building": 2028
+    },
+    "sample_exclusions": [
+      {
+        "cat": "industrial",
+        "name": "PENLEIGH MILL",
+        "nation": "england"
+      },
+      {
+        "cat": "religious",
+        "name": "CHURCH OF HOLY TRINITY",
+        "nation": "england"
+      },
+      {
+        "cat": "religious",
+        "name": "CHURCH OF ST MARY",
+        "nation": "england"
+      },
+      {
+        "cat": "monument_memorial",
+        "name": "UNIDENTIFIED MONUMENT IN THE CHURCHYARD ABOUT 3 METRES SOUTH OF CHURCH OF ST MARY",
+        "nation": "england"
+      },
+      {
+        "cat": "monument_memorial",
+        "name": "TWO ORAM MONUMENTS IN THE CHURCHYARD ABOUT 10 METRES SOUTH WEST OF CHURCH OF ST MARY, ST KATEHERINE AND ALL SAINTS",
+        "nation": "england"
+      },
+      {
+        "cat": "agricultural",
+        "name": "STABLE AT NO 10",
+        "nation": "england"
+      },
+      {
+        "cat": "agricultural",
+        "name": "STABLE AND BARN AT CUTTERIDGE FARM",
+        "nation": "england"
+      },
+      {
+        "cat": "wall",
+        "name": "WALLS AND GATEWAY ON SOUTH SIDE OF CHURCHYARD OF CHURCH OF ST NICHOLAS",
+        "nation": "england"
+      },
+      {
+        "cat": "industrial",
+        "name": "MILL AT ANGLE OF MILL STREET",
+        "nation": "england"
+      },
+      {
+        "cat": "tomb_grave",
+        "name": "Cemetery, The South Mortuary Chapel",
+        "nation": "england"
+      },
+      {
+        "cat": "gate_railings",
+        "name": "GATE PIERS AND SCREEN WALL AND GATES TO CEMETERY",
+        "nation": "england"
+      },
+      {
+        "cat": "tomb_grave",
+        "name": "CEMETERY, KINGSTON AND HASTINGS MAUSOLEUM",
+        "nation": "england"
+      },
+      {
+        "cat": "gate_railings",
+        "name": "GATEPIERS TO NO 35",
+        "nation": "england"
+      },
+      {
+        "cat": "wall",
+        "name": "BOUNDARY WALL OF HIGHFIELD TO THE ROAD",
+        "nation": "england"
+      },
+      {
+        "cat": "bridge",
+        "name": "AQUEDUCT OVER RAILWAY",
+        "nation": "england"
+      },
+      {
+        "cat": "bridge",
+        "name": "BRIDGE TO EAST OF AQUEDUCT OVER RAILWAY",
+        "nation": "england"
+      },
+      {
+        "cat": "milestone_waymarker",
+        "name": "MILESTONE ON SOUTH SIDE OPPOSITE R.N. STORES, COPENACRE",
+        "nation": "england"
+      },
+      {
+        "cat": "cross",
+        "name": "11 Cross Keys",
+        "nation": "england"
+      },
+      {
+        "cat": "street_furniture",
+        "name": "PRIVY IN WALLED GARDEN TO SOUTH OF JAGGARDS HOUSE",
+        "nation": "england"
+      },
+      {
+        "cat": "milestone_waymarker",
+        "name": "MILESTONE SET IN FRONT GARDEN WALL OF NO 3 (MEADOWLANDS)",
+        "nation": "england"
+      },
+      {
+        "cat": "street_furniture",
+        "name": "10 AND 11, POUND PILL",
+        "nation": "england"
+      },
+      {
+        "cat": "telephone_box",
+        "name": "K6 TELEPHONE KIOSK, MELKSHAM ROAD",
+        "nation": "england"
+      },
+      {
+        "cat": "cross",
+        "name": "CROSS OF ST PAULINUS IN GARDEN OF BURNLEY COLLEGE ADULT EDUCATION CENTRE",
+        "nation": "england"
+      },
+      {
+        "cat": "telephone_box",
+        "name": "K6 TELEPHONE KIOSK OUTSIDE NUMBER 152, HIGH STREET",
+        "nation": "england"
+      },
+      {
+        "cat": "statue",
+        "name": "STATUE AT NORTH END OF WILTON HOUSE APPROACH",
+        "nation": "england"
+      },
+      {
+        "cat": "statue",
+        "name": "STATUE ABOUT 40 YARDS EAST OF SEMI CIRCULAR GARDEN SEAT TO EAST OF KITCHEN COURTYARD WALLS",
+        "nation": "england"
+      },
+      {
+        "cat": "well_pump_trough",
+        "name": "PUMP APPROXIMATELY 3 METRES SOUTH OF NUMBER 9",
+        "nation": "england"
+      },
+      {
+        "cat": "lamp",
+        "name": "GAS LAMPS AT ENTRANCE TO SOUTH DRIVE",
+        "nation": "england"
+      },
+      {
+        "cat": "well_pump_trough",
+        "name": "DRINKING FOUNTAIN AND STATUE",
+        "nation": "england"
+      },
+      {
+        "cat": "water_transport_infra",
+        "name": "LOCK STREET HIGH LEVEL RAILWAY",
+        "nation": "england"
+      },
+      {
+        "cat": "lamp",
+        "name": "LAMP STANDARD HAND RAIL AND 10 BOLLARDS WITHIN CURTILAGE OF NOS 128 TO 142",
+        "nation": "england"
+      },
+      {
+        "cat": "post_box",
+        "name": "PILLAR BOX AT EAST END OF DOUBLE STREET, AT JUNCTION WITH CASTLE STREET",
+        "nation": "england"
+      },
+      {
+        "cat": "water_transport_infra",
+        "name": "QUAY WALL AND SLIPWAY ON NORTH SIDE OF SEA STREET",
+        "nation": "england"
+      },
+      {
+        "cat": "post_box",
+        "name": "PILLAR BOX APPROXIMATELY 1 METRE EAST OF WALL IN FRONT OF TOWN HALL",
+        "nation": "england"
+      }
+    ]
+  },
+  "residential_filter": {
+    "purpose": "Density compares against household counts, so it should count DWELLINGS, not all habitable buildings. A listed pub, shop, bank or town hall is a building but not a home and does not affect an estate agent's market. Each habitable building is further split by use.",
+    "method": "Use is read from the name head (England) and Cadw BroadClass (Wales). Non-residential USE words (inn/hotel/pub, shop/stores, bank/offices, town hall/guildhall/exchange, school/college/institute/library/museum/theatre, post/police/fire/railway station, hospital/surgery, etc.) mark an entry commercial. Strong dwelling words (house/cottage/farmhouse/manor/villa/rectory/lodge/terrace/flat/almshouse + numbered street addresses) mark it residential. Street names (\"Bank Street\", \"Hospital Road\") are masked so they are not read as a use. Where a name carries BOTH a dwelling and a commercial signal it is flagged \"mixed\"; where it carries neither it is \"unknown\".",
+    "commercial_examples": "The George Inn; The Castle Public House; Lloyds Bank; former National Schools; Corn Exchange; Market Hall; Victoria Pier; nursing home; community centre.",
+    "density_basis": "HEADLINE = dwellingsEstimate = residential + unclassified-use buildings, per 1,000 households. Described as an ESTIMATE because the unclassified bucket is mostly (not certainly) dwellings. Chosen over strict residential because strict residential under-counts rural areas materially while barely affecting urban ones, biasing the patch-to-patch comparison the density figure exists for; an even estimate is preferable to an uneven under-count, and the small leak tail in the unclassified bucket is the lesser error. mixed is NOT included. All three tiers (listed, buildings, residential) plus useMixed/useUnclassified are stored, and every entry carries a per-entry use flag, so any basis can be recomputed without re-running the pipeline.",
+    "mixed_use": {
+      "count": 4183,
+      "pct_of_buildings": 1.4,
+      "note": "Small (~1.3% of buildings). Genuine dual-use (e.g. \"No 67 (Cluny Cottage) and Post Office\", \"School House and School Cottage\"). Excluded from residential by default; because the count is small, including them would barely move density. Flagged use:\"mixed\" so you can fold them in if you prefer.",
+      "samples": [
+        {
+          "name": "FORMER WOMENS INSTITUTE TABERNACLE COTTAGES",
+          "nation": "england"
+        },
+        {
+          "name": "NO 67 (CLUNY COTTAGE) AND POST OFFICE",
+          "nation": "england"
+        },
+        {
+          "name": "THE FARMHOUSE INN",
+          "nation": "england"
+        },
+        {
+          "name": "THE FOX TALBOT MUSEUM AND ABBEY LODGE AND ENTRANCE GATES",
+          "nation": "england"
+        },
+        {
+          "name": "SCHOOL HOUSE AND SCHOOL COTTAGE",
+          "nation": "england"
+        },
+        {
+          "name": "STORE HOUSE AND ANIMAL HOUSE TO THE SOUTH EAST OF MANOR FARMHOUSE",
+          "nation": "england"
+        },
+        {
+          "name": "SCHOOL AND ALMSHOUSES",
+          "nation": "england"
+        },
+        {
+          "name": "DAIRY COTTAGE",
+          "nation": "england"
+        },
+        {
+          "name": "REGENCY HOUSE HOTEL",
+          "nation": "england"
+        },
+        {
+          "name": "GARDEN WALL TO REGENCY HOUSE HOTEL",
+          "nation": "england"
+        },
+        {
+          "name": "LODGE TO MORETON HALL SCHOOL",
+          "nation": "england"
+        },
+        {
+          "name": "BEAR COTTAGES THE BEAR INN",
+          "nation": "england"
+        }
+      ]
+    },
+    "unknown_use": {
+      "count": 56445,
+      "pct_of_all_entries": 13.8,
+      "pct_of_buildings": 19,
+      "note": "Habitable buildings whose name carries no use signal. After hardening the structure filter (position-independent rules for barns, mills, monuments, memorials, churches, gates, tombs, etc.), this bucket is now PREDOMINANTLY genuine dwellings named without a type word — country/village houses such as \"Tedgewood\", \"The Hermitage\", \"Rocklands\", \"Whitfield\", \"Sunnyside\". A small tail of structure leaks remains. It is heavily skewed to rural areas where houses are named rather than numbered: in urban Monmouth/Chepstow it is a handful of entries, in the rural Ross-on-Wye hinterland it is larger.",
+      "decision": "ADOPTED as the headline density basis: dwellingsEstimate = residential + unknown. The residual unknown bucket is mostly real dwellings named without a type word, so strict residential under-counts homes — materially in rural areas, barely in urban ones. That uneven bias is worse for patch-to-patch comparison than the small, even over-count from the unclassified leak tail. Strict residential remains stored as a conservative floor; habitable buildings and the honest listed total are stored too. For urban patches the estimate and strict residential barely differ; for rural ones the difference is material (e.g. HR9 Ross-on-Wye 25.0 estimate vs 19.9 strict per 1,000).",
+      "samples": [
+        {
+          "name": "THE MONASTERY GARDEN",
+          "nation": "england"
+        },
+        {
+          "name": "PREMISES OCCUPIED BY GEORGE HILLIER (WEST PART)",
+          "nation": "england"
+        },
+        {
+          "name": "BUILDING TO NORTH WEST OF WESTCROFT",
+          "nation": "england"
+        },
+        {
+          "name": "WALDRON'S SQUARE",
+          "nation": "england"
+        },
+        {
+          "name": "CAST IRON LAMP STANDARD AT WEST FRONT OF THE TABERNACLE",
+          "nation": "england"
+        },
+        {
+          "name": "BEECHWOOD",
+          "nation": "england"
+        },
+        {
+          "name": "BUILDING AT REAR OF NOS 1 AND 1A",
+          "nation": "england"
+        },
+        {
+          "name": "BUILDING AT REAR OF NO 2",
+          "nation": "england"
+        },
+        {
+          "name": "REAR EXTENSION OF NO 7, TOGETHER WITH PART OF REAR OF NO 8",
+          "nation": "england"
+        },
+        {
+          "name": "BUILDING AT REAR OF NO 43",
+          "nation": "england"
+        },
+        {
+          "name": "LLOYD'S BANK",
+          "nation": "england"
+        },
+        {
+          "name": "THE GROVE",
+          "nation": "england"
+        }
+      ]
+    },
+    "use_split": {
+      "england": {
+        "residential": 195267,
+        "commercial": 22992,
+        "mixed": 4000,
+        "unknown": 55941
+      },
+      "wales": {
+        "residential": 14702,
+        "commercial": 3040,
+        "mixed": 183,
+        "unknown": 504
+      }
+    },
+    "totals_after": {
+      "england_residential": 195267,
+      "wales_residential": 14702,
+      "combined_residential": 209969
+    }
+  },
+  "method": "Listed buildings joined to v6 sector polygons by point-in-polygon (ray casting, 0.2° grid index); district derived from sector code. Conservation areas assigned by polygon centroid. Same PIP engine as the census-households pipeline.",
+  "coverage": "England and Wales. Scottish areas (AB,DD,DG,EH,FK,G,HS,IV,KA,KW,KY,ML,PA,PH,TD,ZE) written with empty codes and an explanatory note. Northern Ireland (BT) is absent from the boundary set, as in the sales/census pipelines.",
+  "grading": "England and Wales share grades I, II*, II. Scotland uses A, B, C (not processed — known gap).",
+  "not_processed": "Scheduled monuments and registered parks & gardens were NOT processed. They sit in the same NHLE/Cadw datasets and would be straightforward to add (additional FeatureServer layers 6 and 7 for England; separate Cadw layers for Wales).",
+  "totals": {
+    "listed_entries_total": 409797,
+    "buildings_after_filter": 296629,
+    "listed_assigned": 406653,
+    "listed_outside_all_polygons": 3144,
+    "conservation_areas_total": 8750,
+    "conservation_assigned": 8694,
+    "conservation_outside_all_polygons": 56,
+    "conservation_straddling_district_boundary": 1127,
+    "sector_features": 9384
+  },
+  "conservation_geometry": {
+    "simplification": "Douglas-Peucker, tolerance 0.00007° (~6m), coordinates rounded to 6dp",
+    "raw_MB": 144.39,
+    "simplified_MB": 10.88
+  },
+  "scotland_note": "Historic Environment Scotland publishes listed buildings and conservation areas as open data (spatialdata.gov.scot / HES ArcGIS). Obtainable in comparable form (points + polygons), but grades differ (A/B/C) and would need a separate download; not attempted here.",
+  "files_per_area": [
+    "{AREA}-heritage.json (statistics)",
+    "{AREA}-listed.json (point geometry)",
+    "{AREA}-conservation.json (polygon geometry)"
+  ]
+}

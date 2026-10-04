@@ -1,0 +1,30 @@
+{
+  "source": "ONS Postcode Directory (ONSPD) May 2026",
+  "source_item_id": "6fff67d204fd4f339591ed667a6e3642",
+  "release": "May 2026",
+  "generated": "2026-07-31",
+  "live_postcodes": 1797957,
+  "terminated_postcodes": 915354,
+  "total_postcodes_in_source": 2713311,
+  "filter": "doterm field empty = live only",
+  "postcode_field": "pcds (variable-length, index 2) — space split: left=district, left+space+char1=sector",
+  "columns_used": {
+    "pcds": "index 2 — variable-length postcode",
+    "doterm": "index 4 — termination date; non-empty rows excluded",
+    "lad25cd": "index 7 — local authority district",
+    "wd25cd": "index 8 — ward",
+    "ctry25cd": "index 16 — country",
+    "rgn25cd": "index 17 — region (England only; blank for Wales/Scotland/NI)",
+    "pcon24cd": "index 19 — Westminster parliamentary constituency",
+    "npark16cd": "index 28 — national park (included where any postcodes fall within)",
+    "ruc21ind": "index 52 — 2021 rural/urban classification"
+  },
+  "rural_urban_grouping": {
+    "urban": "EW 2021 codes UN1/UF1 (Urban nearer/further from major town); Scotland codes 1/2/3",
+    "rural": "EW 2021 codes RLF1/RLN1/RSF1/RSN1 (Larger/Smaller rural further/nearer); Scotland codes 4/5/6",
+    "other": "NI (ruc21ind blank in ONSPD for BT postcodes) or unrecognised"
+  },
+  "bt_coverage": "BT included: 50,116 live postcodes across 80 districts and 269 sectors. No boundary geometry in v6 — data is present but cannot be drawn on the map.",
+  "areas_processed": 121,
+  "files_written": 122
+}

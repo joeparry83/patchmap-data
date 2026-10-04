@@ -1,0 +1,22 @@
+{
+  "source": "HM Land Registry Price Paid Data (Open Government Licence)",
+  "source_url": "https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads",
+  "files_used": [
+    "pp-2025.csv",
+    "pp-2026.csv"
+  ],
+  "window": {
+    "from": "2025-01-31",
+    "to": "2026-01-31"
+  },
+  "generated": "2026-07-31",
+  "filter": "PPD Category A only; postcode required; Date of Transfer within window",
+  "total_records_processed": 1184740,
+  "total_records_included": 773016,
+  "areas_with_data": 104,
+  "areas_without_data": 16,
+  "notes": [
+    "Scotland and Northern Ireland: PPD covers England and Wales only.",
+    "Registrations lag completions by 3–4 months; window ends 6 months before generation date to avoid partially-populated recent period."
+  ]
+}

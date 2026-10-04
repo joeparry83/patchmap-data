@@ -1,0 +1,107 @@
+{
+  "census_year": 2021,
+  "source": "Office for National Statistics Census 2021 (Open Government Licence)",
+  "generated": "2026-08-23",
+  "tables_used": [
+    "TS007A — age (5-year bands, TS007A)",
+    "TS066 — economic activity (TS066)",
+    "TS062 — occupation / NS-SeC (TS062)",
+    "TS067 — highest qualification (TS067)",
+    "TS058 — distance travelled to work (TS058)",
+    "TS011 — household deprivation (TS011)",
+    "TS056 — second address (TS056)"
+  ],
+  "fields": {
+    "ageBands": {
+      "table": "TS007A",
+      "method": "oa_centroid",
+      "type": "count",
+      "note": "Age by 5-year bands, grouped. Available at OA despite the single-year table TS007 being MSOA-only."
+    },
+    "economicActivity": {
+      "table": "TS066",
+      "method": "oa_centroid",
+      "type": "count",
+      "note": "inEmployment/unemployed/economicallyInactive partition the 16+ population; retired and student are subsets of economicallyInactive (student = economically inactive full-time students)."
+    },
+    "occupation": {
+      "table": "TS062",
+      "method": "oa_centroid",
+      "type": "count",
+      "note": "NS-SeC. Professional/managerial share = (higherManagerialProfessional + lowerManagerialProfessional) / total."
+    },
+    "qualifications": {
+      "table": "TS067",
+      "method": "oa_centroid",
+      "type": "count",
+      "note": "Degree-level share = level4plus / total."
+    },
+    "distanceToWork": {
+      "table": "TS058",
+      "method": "oa_centroid",
+      "type": "count",
+      "note": "Denominator is 16+ in employment. Includes worksFromHome; other = offshore/no fixed place/outside UK."
+    },
+    "deprivation": {
+      "table": "TS011",
+      "method": "oa_centroid",
+      "type": "count",
+      "note": "Household deprivation, four dimensions. Same table already present in {AREA}-households.json."
+    },
+    "secondAddress": {
+      "table": "TS056",
+      "method": "oa_centroid",
+      "type": "count",
+      "note": "Proxy for holiday/second homes. share = (inUK + outsideUK) / total."
+    }
+  },
+  "method": "Population-weighted OA centroids (OA_December_2021_EW_PWC_V4) joined to v6 sector boundaries by point-in-polygon (ray casting, 0.2° grid). District = sector prefix. Every field uses this single method; NONE are LSOA-apportioned.",
+  "apportionment_note": "The brief anticipated age being LSOA-only and requiring household-weighted apportionment. In fact TS007A (age by 5-year bands) is published at OA, so the finer, consistent OA centroid join was used for age too. No field required LSOA apportionment; none were found to be LSOA-only.",
+  "estimate_vs_count": "All fields are Output Area counts assigned by centroid (same method and quality tier as the household data). They are accurate at district level and progressively coarser at sector level; they are NOT modelled or apportioned estimates.",
+  "income_deliberately_absent": "Household income is NOT included. Census 2021 does not ask about income. ONS publishes only a MODELLED income estimate at MSOA level (~25x coarser than OA), a different quality of number from these measured counts; including it beside real counts would mislead. Do not add it without a deliberate decision.",
+  "oa_centroids": "OA_December_2021_EW_PWC_V4 (ONS Open Geography Portal)",
+  "oas_matched": 188486,
+  "oas_unmatched": 394,
+  "per_table_oa_match": {
+    "ts007a": {
+      "rows": 188880,
+      "matched": 188486,
+      "unmatched": 394
+    },
+    "ts066": {
+      "rows": 188880,
+      "matched": 188486,
+      "unmatched": 394
+    },
+    "ts062": {
+      "rows": 188880,
+      "matched": 188486,
+      "unmatched": 394
+    },
+    "ts067": {
+      "rows": 188880,
+      "matched": 188486,
+      "unmatched": 394
+    },
+    "ts058": {
+      "rows": 188880,
+      "matched": 188486,
+      "unmatched": 394
+    },
+    "ts011": {
+      "rows": 188880,
+      "matched": 188486,
+      "unmatched": 394
+    },
+    "ts056": {
+      "rows": 188880,
+      "matched": 188486,
+      "unmatched": 394
+    }
+  },
+  "districts_with_data": 2274,
+  "sectors_with_data": 8078,
+  "avg_oas_per_sector": 23.3,
+  "coverage": "England and Wales only. Scottish areas written with empty codes and an explanatory note. Northern Ireland (BT) is not in the v6 area set (no boundary geometry) and has no file, consistent with the household, flood and other v6 stats pipelines; NI ran a separate 2021 census (NISRA).",
+  "scotland_note": "Census 2022 for Scotland is published by National Records of Scotland using Output Zones; a separate pipeline would be required."
+}

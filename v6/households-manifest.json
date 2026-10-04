@@ -1,0 +1,31 @@
+{
+  "census_year": 2021,
+  "source": "Office for National Statistics Census 2021 (Open Government Licence)",
+  "tables_used": [
+    "TS041 (households)",
+    "TS001 (population)",
+    "TS044 (accommodation)",
+    "TS054 (tenure)",
+    "TS050 (bedrooms)",
+    "TS052 (occupancy)",
+    "TS003 (composition)",
+    "TS017 (size)",
+    "TS011 (deprivation)",
+    "TS045 (cars)"
+  ],
+  "tables_not_at_oa": [
+    "TS007 (age by single year) — ONS did not publish at OA level; available at LSOA and above only"
+  ],
+  "oa_centroids": "OA_December_2021_EW_PWC_V4 (ONS Open Geography Portal, ArcGIS REST service)",
+  "method": "Population-weighted OA centroids joined to v6 sector boundaries via point-in-polygon (ray casting, 0.2° grid index)",
+  "generated": "2026-07-31",
+  "oas_downloaded": 188880,
+  "oas_matched_spatial": 188486,
+  "oas_unmatched_spatial": 394,
+  "oas_matched_table": 188486,
+  "oas_unmatched_table": 394,
+  "sectors_with_data": 8078,
+  "avg_oas_per_sector": 23.3,
+  "coverage": "England and Wales only. Scottish areas have empty codes with explanatory note.",
+  "scotland_note": "Census 2022 for Scotland is published by National Records of Scotland (nrscotland.gov.uk) using Output Zones (OZ). Broadly comparable to E&W OAs. A Scotland pipeline would require a separate OZ centroid download and Scotland postcode lookup."
+}

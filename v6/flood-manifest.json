@@ -1,0 +1,69 @@
+{
+  "generated": "2026-08-10",
+  "sources": {
+    "england": {
+      "provider": "Environment Agency",
+      "dataset": "Flood Map for Planning (Rivers and Sea) — Flood Zone 2 and Flood Zone 3",
+      "endpoint": "ArcGIS FeatureServer Flood_Map_for_Planning (L1 FZ3, L2 FZ2)",
+      "licence": "Open Government Licence",
+      "crs_source": "British National Grid (EPSG:27700), served reprojected to WGS84",
+      "generalisation": "server-side maxAllowableOffset ~65m"
+    },
+    "wales": {
+      "provider": "Natural Resources Wales",
+      "dataset": "Flood Map for Planning — Rivers and Sea (Flood Zones 2 and 3)",
+      "endpoint": "ArcGIS FeatureServer FMfP_Detailed_Map_Open_Data (L2 Rivers, L3 Sea; Risk field = zone)",
+      "licence": "Open Government Licence",
+      "crs_source": "served in WGS84",
+      "generalisation": "server-side maxAllowableOffset ~65m",
+      "note": "Surface Water & Small Watercourses and Reservoir layers were NOT used, as instructed.",
+      "zone2_semantics": "Unlike the EA, NRW publishes Flood Zone 2 as a sparse/partial band that does NOT contain Flood Zone 3. The Zone-2 overlay unions Zone 2 with Zone 3 to reconstruct the true >=0.1% envelope."
+    }
+  },
+  "extract_dates": "EA + NRW Flood Map for Planning, downloaded 2026-08-10 (NRW pub_date 2026-05-21).",
+  "zone_definitions": {
+    "zone3": "Flood Zone 3 — high probability: 1% (1 in 100) or greater annual chance from rivers, or 0.5% (1 in 200) or greater from the sea.",
+    "zone2": "Flood Zone 2 — medium probability: between 0.1% (1 in 1000) and 1% (1 in 100) from rivers, or 0.1%–0.5% from the sea. Reported here EXCLUDING Zone 3 to avoid double counting.",
+    "zone1": "Everywhere else (low probability, <0.1%). Not published as a polygon; reported as the \"none\" remainder."
+  },
+  "zone_overlap": "Publisher difference: the EA (England) Zone 2 polygon is the outer 0.1% envelope and CONTAINS Zone 3; the NRW (Wales) Zone 2 polygon is sparse/partial and does NOT contain Zone 3. STATISTICS are unaffected — each point is classified Zone 3 first, else Zone 2, else none, so household counts are mutually exclusive (Zone 2 = medium-only band) and never double-count. OVERLAY — the Zone-2 layer is drawn as the full >=0.1% envelope = dissolve(Zone 2 UNION Zone 3), so it visually contains Zone 3 for both publishers. Nesting check on the pooled EA+NRW point set (points in Z3 but not in any Zone-2 polygon; high because NRW FZ2 does not nest): 13363.",
+  "defences": "The EA and NRW Flood Map for Planning zones deliberately IGNORE flood defences — they show the natural floodplain as if no defences existed. So a property counted here as at-risk may in practice be protected by a defence. Areas benefiting from defences (EA \"Areas Benefiting from Defences\", NRW TAN15 Defended Zones) are published separately and are NOT applied here.",
+  "method": {
+    "households": "ONS Postcode Directory (May 2026) live postcodes in England & Wales. Each postcode centroid (WGS84) classified against the pooled EA+NRW flood polygons. Households apportioned to each postcode = its OA census-2021 household count (TS041) divided evenly among the OA's live postcodes, then summed to district/sector by the postcode string.",
+    "land_area": "Secondary measure. Regular 0.002° lattice (~180 m) sampled inside each sector polygon; fraction of interior points in each zone. District = sum of its sectors (uniform lattice → area-weighted).",
+    "code_assignment": "District and sector derived from the postcode string (e.g. NP25 3AB → NP25, NP25 3); no point-in-polygon needed for assignment."
+  },
+  "caveats": {
+    "postcode_centroid": "A postcode covers several addresses; its centroid may sit in a zone while some addresses do not, or vice versa. The household figure is therefore approximate, but measures housing stock at risk far better than land-area percentage.",
+    "household_apportionment": "OA households are split evenly across the OA's postcodes (actual counts per postcode are not published), a further approximation.",
+    "straddle": "Households in postcodes whose zone membership changes within ~75 m of the centroid (a proxy for postcodes straddling a zone boundary): 2,577,463 households in 184,131 postcodes."
+  },
+  "coverage": "England and Wales. Scottish areas (AB,DD,DG,EH,FK,G,HS,IV,KA,KW,KY,ML,PA,PH,TD,ZE) written with empty codes and an explanatory note. Northern Ireland (BT) is absent from the boundary set, as in the other pipelines.",
+  "scotland_note": "SEPA (Scottish Environment Protection Agency) publishes flood maps for Scotland (Flood Maps / Flood Risk Management) as open data via an ArcGIS/spatialdata portal. Obtainable in broadly comparable form (river/coastal flood extents), though zone definitions and banding differ; not attempted here.",
+  "totals": {
+    "postcodes_assigned": 1585479,
+    "postcodes_unassigned_no_coord": 0,
+    "england_households_zone3": 1322372,
+    "england_households_zone2": 606023,
+    "england_households_total": 23424648,
+    "wales_households_zone3": 154385,
+    "wales_households_zone2": 29724,
+    "wales_households_total": 1347074
+  },
+  "geometry": {
+    "overlay_note": "Two overlay layers: Zone 3 = dissolve(Zone 3 tiles); Zone 2 = dissolve(Zone 2 UNION Zone 3 tiles) so the Zone-2 layer is the full >=0.1% envelope and visually contains Zone 3 for both EA and NRW (NRW's published FZ2 does not nest, so the union is required). For each layer the overlapping NRW/EA source tiles are DISSOLVED into clean non-overlapping geometry (removing the internal tile edges), simplified with mapshaper's topology-safe simplifier (~40m), clipped to the area's ACTUAL boundary (union of its district polygons in {AREA}.json), cleaned, and exploded to single-part polygons. Tiny spurious holes (dissolve tile-gap artefacts) and polygons under ~0.5ha are dropped by absolute area (corridor-safe); real dry-island holes are kept. Zone 2 drawn first (underneath), Zone 3 on top. This replaces an earlier bounding-box clip and a naive per-tile clip that had left rectangular edges, neighbouring-area spillover, a visible grid of tile fragments, and mega-MultiPolygons that failed to render. Simplified independently of the statistics, which use the full-resolution polygons.",
+    "largest_files": [
+      "SA 2.4MB",
+      "LL 2.4MB",
+      "SY 1.8MB",
+      "PE 1.2MB",
+      "EX 1.2MB",
+      "YO 1.1MB"
+    ],
+    "total_MB": 36.7
+  },
+  "files_per_area": [
+    "{AREA}-flood.json (statistics)",
+    "{AREA}-floodzones.json (zone polygons for the overlay)"
+  ]
+}

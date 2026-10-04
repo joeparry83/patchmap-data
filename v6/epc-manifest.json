@@ -1,0 +1,20 @@
+{
+  "source": "Energy Performance of Buildings Data — domestic certificates (bulk CSV full load)",
+  "source_url": "https://get-energy-performance-data.communities.gov.uk/",
+  "extract_date": "2026-10-01T01:56:29.000+00:00",
+  "generated": "2026-10-04",
+  "coverage_statement": "~80 to 82% of dwellings have an EPC",
+  "coverage": "England & Wales. EPCs have accumulated since ~2008 (every sale, letting and new build), reaching roughly 80-82% of dwellings by 2026. Stated as a band because the point figure (national_coverage_estimate) is spuriously precise for an accumulation-based measure with a ~1.7% address-matched tail; national_coverage_uprn_only is the exact-match floor. Use coveragePerHousehold per code for local detail.",
+  "national_coverage_estimate": 0.824,
+  "national_coverage_uprn_only": 0.811,
+  "certificate_rows_read": 30375081,
+  "unique_properties": 20390076,
+  "unique_properties_via_uprn": 20051266,
+  "unique_properties_via_address_fallback": 338810,
+  "unique_properties_assigned_EW": 20383013,
+  "dedupe": "latest certificate per property (UPRN where present, else normalised postcode+address1). UPRN dedupe is exact; the address fallback can only over-count unique properties (inflating coverage), never under-count.",
+  "shards": 4,
+  "files_written": 120,
+  "codes_with_data": 12650,
+  "scotland_note": "Scotland has a separate EPC register (Scottish Government); not processed. Northern Ireland (BT) has no boundary geometry in v6."
+}

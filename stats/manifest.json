@@ -6,13 +6,13 @@
     "pp-2026.csv"
   ],
   "window": {
-    "from": "2025-04-01",
-    "to": "2026-03-31"
+    "from": "2025-05-01",
+    "to": "2026-04-30"
   },
-  "generated": "2026-10-04",
+  "generated": "2026-11-02",
   "filter": "PPD Category A only; postcode required; Date of Transfer within window",
-  "total_records_processed": 1360325,
-  "total_records_included": 707512,
+  "total_records_processed": 1450241,
+  "total_records_included": 735256,
   "areas_with_data": 104,
   "areas_without_data": 16,
   "notes": [
